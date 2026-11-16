@@ -1,4 +1,3 @@
-@"
 # Refeição Solidária — API
 
 API do projeto FIREFLYTECH.
@@ -13,4 +12,3 @@ Tecnologias previstas:
 O desenvolvimento será realizado em branches individuais
 ,
 com Pull Requests e atividades vinculadas ao Jira.
-"@ | Set-Content -Encoding UTF8 README.md
