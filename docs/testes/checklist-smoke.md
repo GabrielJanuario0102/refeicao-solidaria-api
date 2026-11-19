@@ -1,6 +1,6 @@
 # Smoke test — checklist inicial
 
-**Status:** EXECUTADO PARCIALMENTE EM 19/11/2026 (Web `REF-13`, API `REF-14` e Requisitos `REF-12` verificados; Banco `REF-15` aguardando entrega no repositório).
+**Status:** EXECUTADO E APROVADO EM 19/11/2026 (Web `REF-13`, API `REF-14`, Banco `REF-15` e Requisitos `REF-12` verificados com evidências).
 
 ## S1 — Web (Robson — `REF-13`)
 
@@ -23,17 +23,17 @@
 
 ## S1 — Banco (Jefferson — `REF-15`)
 
-- [ ] `docker compose config` validado — log: `NÃO EXECUTADO / BLOQUEADO — arquivo docker-compose.yml (Task REF-15) ainda não integrado na branch main do repositório refeicao-solidaria-api até 19/11/2026`
-- [ ] Containers PostgreSQL + pgAdmin iniciados — log: `NÃO EXECUTADO / BLOQUEADO — aguardando entrega da Task REF-15`
-- [ ] `pg_isready` confirmou prontidão — log: `NÃO EXECUTADO / BLOQUEADO — aguardando entrega da Task REF-15`
-- [ ] Acesso ao pgAdmin e conexão ao servidor `db:5432` — evidência: `NÃO EXECUTADO / BLOQUEADO — aguardando entrega da Task REF-15`
-- [ ] Modelo conceitual revisado — link: `NÃO EXECUTADO / BLOQUEADO — aguardando publicação do modelo conceitual da Task REF-15 no repositório`
+- [x] `docker compose config` validado — log: `docker compose config validou sem erros os serviços db (postgres:15-alpine, porta 5444:5432, volume postgres_data) e pgadmin (dpage/pgadmin4:latest, porta 5051:80) — commit c095a75 / merge b8afc68`
+- [x] Containers PostgreSQL + pgAdmin iniciados — log: `docker compose up -d e docker compose ps confirmaram refeicao-solidaria-api-db-1 (Up, healthy, 0.0.0.0:5444->5432/tcp) e refeicao-solidaria-api-pgadmin-1 (Up, 0.0.0.0:5051->80/tcp)`
+- [x] `pg_isready` confirmou prontidão — log: `docker compose exec -T db pg_isready -U postgres -d refeicaosolidaria -> /var/run/postgresql:5432 - accepting connections (PostgreSQL 15.19 on x86_64-pc-linux-musl)`
+- [x] Acesso ao pgAdmin e conexão ao servidor `db:5432` — evidência: `GET http://localhost:5051/login retornou HTTP 200; conectividade interna do container pgadmin para db:5432 confirmada em ('172.22.0.2', 5432) e query SELECT current_database(), current_user executada com sucesso no banco refeicaosolidaria`
+- [x] Modelo conceitual revisado — link: `docs/banco/modelo-conceitual.md e docs/banco/ambiente-local.md verificados (entidades Usuario, Doacao e Solicitacao, enums TipoUsuario, StatusDoacao e StatusSolicitacao, e diagrama ER Mermaid)`
 
 ## S1 — Requisitos (Gabriel — `REF-12` / `REF-10` / `REF-11`)
 
 - [x] Quatro papéis e visitante documentados — PR: `PR #1 (commit 9f1180b / merge bdfda03) integrado em docs/requisitos/visao-e-escopo.md documentando Visitante, DOADOR, INSTITUICAO, VOLUNTARIO e ADMIN`
 - [x] Backlog/DoD/regras de Git documentados — PR: `PR #1 (commit 9f1180b / merge bdfda03) integrado em docs/gestao/backlog-e-sprints.md, docs/gestao/definition-of-done.md, docs/gestao/stories-sprint-1.md e CONTRIBUTING.md`
-- [ ] Stories REF-10 e REF-11 verificadas e aceitas — comentário: `Critérios técnicos de REF-10 e REF-11 conferidos em código e documentação; aceite formal final no Jira sob responsabilidade do gerente (Gabriel)`
+- [ ] Stories REF-10 e REF-11 verificadas e aceitas — comentário: `Critérios técnicos de REF-10 e REF-11 validados e aprovados nos testes; registro formal de aceite no Jira sob responsabilidade do gerente (Gabriel)`
 
-**Resultado da rodada:** ( ) PASSOU ( ) FALHOU (x) BLOQUEADO ( ) NÃO EXECUTADO  
-**Data:** `19/11/2026`  **Executor:** `Nelson Nunes`  **Ambiente:** `Windows 11 / Node.js v24.14.0 / JDK 25.0.2 (release 21) / Docker 29.6.2`  **Pendências:** `Aguardando entrega e merge da Task REF-15 (Jefferson — Docker Compose PostgreSQL/pgAdmin e modelo conceitual) e aceite final das Stories REF-10 e REF-11 no Jira pelo gerente.`
+**Resultado da rodada:** (x) PASSOU ( ) FALHOU ( ) BLOQUEADO ( ) NÃO EXECUTADO  
+**Data:** `19/11/2026`  **Executor:** `Nelson Nunes`  **Ambiente:** `Windows 11 / Node.js v24.14.0 / JDK 25.0.2 (release 21) / Docker 29.6.2 (PostgreSQL 15.19 + pgAdmin 4)`  **Pendências:** `Nenhuma pendência técnica nos testes da Sprint 1 (CT-S1-01 a CT-S1-05 aprovados); resta apenas o aceite formal do PR e das Stories REF-10 e REF-11 no Jira pelo gerente.`
